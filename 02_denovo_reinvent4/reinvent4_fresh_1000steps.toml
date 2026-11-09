@@ -1,0 +1,61 @@
+# ==================================================================================================
+# REINVENT 4 — CD97 1000-Step RL Campaign — FRESH RESTART (Step 1 → 1000)
+# Target: Human CD97 (ADGRE5) Inactive Apo GPCR
+# Scoring: AutoDock-GPU 128wi + GNINA CNN + PLIP 2.3.1 + MMFF94s Strain
+# NO PRIOR KNOWLEDGE — clean prior only, no checkpoint resume
+# ==================================================================================================
+
+run_type = "staged_learning"
+device   = "cuda:0"
+
+tb_logdir       = "analysis/fresh_run_1000steps/tensorboard"
+json_out_config = "analysis/fresh_run_1000steps/cd97_fresh_1000steps.json"
+
+[parameters]
+summary_csv_prefix = "analysis/fresh_run_1000steps/cd97_fresh"
+
+# FRESH START: agent_file = same clean prior, no fine-tuned checkpoint
+use_checkpoint  = false
+purge_memories  = true
+
+prior_file = "priors/reinvent.prior"
+agent_file = "priors/reinvent.prior"
+
+batch_size       = 64
+randomize_smiles = true
+tb_isim          = false
+
+[learning_strategy]
+type  = "dap"
+sigma = 40.0
+rate  = 0.0001
+
+[diversity_filter]
+type               = "IdenticalMurckoScaffold"
+bucket_size        = 25
+minscore           = 0.50
+penalty_multiplier = 0.50
+
+# ==================================================================================================
+# STAGE: 1000 Steps × 64 molecules = 64,000 molecules evaluated
+# Checkpoint saved every step — always resumable
+# ==================================================================================================
+[[stage]]
+chkpt_file  = "checkpoints/fresh_run_1000steps/cd97_fresh_final.chkpt"
+termination = "simple"
+max_score   = 0.95
+min_steps   = 100
+max_steps   = 1000
+
+[stage.scoring]
+type = "geometric_mean"
+
+[[stage.scoring.component]]
+[stage.scoring.component.CD97RealOracleScorer]
+[[stage.scoring.component.CD97RealOracleScorer.endpoint]]
+name   = "CD97 Real-Oracle Multi-Objective Evaluation"
+weight = 1.0
+params.output_dir   = ["analysis/fresh_run_1000steps/docking_runs"]
+params.sigma        = 40.0
+params.max_strain   = 10.0
+params.min_ra_score = 0.60

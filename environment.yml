@@ -1,0 +1,33 @@
+name: cd97_env
+channels:
+  - conda-forge
+  - bioconda
+  - pytorch
+  - defaults
+dependencies:
+  - python>=3.10,<3.12
+  # S1.2.1: RDKit v2023.09.6
+  - rdkit>=2024.03.6
+  # Historical screening version needs confirmation; 2.3.1 is mentioned in the run configuration.
+  - plip>=3.0.1
+  - openbabel>=3.1.1
+  # S1.4.1: OpenMM 8.x
+  - openmm>=8.5.2
+  # S1.4.2: MDAnalysis
+  - mdanalysis>=2.9.0
+  - meeko>=0.7.1
+  # Core data processing
+  - numpy>=2.2.6
+  - pandas>=2.3.3
+  - scipy>=1.15.2
+  - matplotlib>=3.10.1
+  - pyyaml>=6.0.3
+  - biopython>=1.85
+  - pillow>=10.3.0
+  # S1.3.2: RAscore dependencies
+  - scikit-learn>=1.6.2
+  - xgboost>=1.7.0
+  # S1.3.6: TorchANI & PyTorch GPU acceleration
+  - pytorch>=2.5.1
+  - pip:
+      - torchani>=2.8.4

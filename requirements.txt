@@ -1,0 +1,41 @@
+# ==============================================================================
+# Python Dependencies for CD97 Virtual Screening & Molecular Dynamics Pipeline
+# Matching Supplementary Note 1: Comprehensive Computational Methodology
+# ==============================================================================
+
+# Section S1.2.1: Chemical Library Curation & Property Filtering
+# Explicit manuscript version: RDKit v2023.09.6 (Landrum et al., 2023)
+rdkit>=2023.09.6
+
+# Section S1.2.6 & S1.3.5: Non-Covalent Interaction Profiling
+# The historical screening version needs confirmation from its environment log.
+# The REINVENT configuration mentions PLIP 2.3.1; compatibility must be tested.
+plip>=2.3.1
+
+# Section S1.2.1: Ligand Preparation & PDBQT Conversion
+meeko>=0.4.0
+
+# Section S1.3.2 & S1.3.7: Retrosynthetic Accessibility (RAscore)
+# Reymond Group CASP model (XGB_chembl_ecfp_counts)
+xgboost>=1.7.0
+scikit-learn>=1.2.0
+
+# Section S1.2.5 & S1.3.6: GPU Conformational Strain Energy Assessment
+# TorchANI ANI-2x Neural Network Potential
+# Install PyTorch matching your CUDA runtime (e.g. cu121):
+# pip install torch --index-url https://download.pytorch.org/whl/cu121
+torch>=2.0.0
+torchani>=2.2.0
+
+# Section S1.4.1 & S1.4.2: Molecular Dynamics Triage & Trajectory Analysis
+MDAnalysis>=2.5.0
+openmm>=8.1.0
+
+# Core Scientific Stack & Visualization
+numpy>=1.24.0
+pandas>=2.0.0
+scipy>=1.10.0
+matplotlib>=3.7.0
+pyyaml>=6.0
+biopython>=1.80
+pillow>=9.5.0

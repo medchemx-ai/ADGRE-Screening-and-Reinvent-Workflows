@@ -1,0 +1,57 @@
+# ==============================================================================
+# CD97 Virtual Screening & Molecular Dynamics Pipeline - .gitignore
+# ==============================================================================
+
+# --- Python Bytecode & Cache ---
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+
+# --- Virtual Environments ---
+.env
+.venv
+env/
+venv/
+ENV/
+*.conda/
+
+# --- Bundled Platform Binaries & Wheels ---
+# (OpenMM wheels are platform-specific Linux manylinux_2_34 x86_64 binaries;
+#  install via conda-forge or pip instead)
+openmm_wheels/
+*.whl
+
+# --- Backup & Redundant Archives ---
+*.tar.gz
+*.tar
+*.zip
+*.7z
+*.bak
+
+# --- Molecular Dynamics Run Artifacts & Trajectories ---
+# Large simulation trajectories, energy files, and checkpoints
+*.xtc
+*.trr
+*.edr
+*.cpt
+*.chk
+# Keep PDB/PDBQT files used as structure templates or validation fixtures
+
+# --- General Run Output Directories ---
+accurate_interaction_diagrams/results/
+dockresult/
+outputs/
+scratch/
+archive_unused/
+
+# --- Operating System & Editor Metadata ---
+.DS_Store
+Thumbs.db
+ehthumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
